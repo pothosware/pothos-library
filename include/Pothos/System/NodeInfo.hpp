@@ -1,7 +1,7 @@
 //
 // System/Info.hpp
 //
-// Information gathering about the system configuration.
+// Support for querying information about a host's configuration.
 //
 // Copyright (c) 2013-2014 Josh Blum
 // SPDX-License-Identifier: BSL-1.0
@@ -9,7 +9,7 @@
 
 #pragma once
 #include <Pothos/Config.hpp>
-#include <vector>
+#include <cstddef>
 #include <string>
 
 namespace Pothos {
@@ -37,35 +37,11 @@ public:
     std::string nodeName;
     std::string nodeId;
 
+    //! The number of CPUs on this system
+    size_t processorCount;
+
     //! The process id of the caller
     std::string pid;
-};
-
-/*!
- * CpuInfo is a simple struct loaded with query information.
- */
-class POTHOS_API CpuInfo
-{
-public:
-    /*!
-     * Creates a blank CpuInfo with values initialized to zero.
-     */
-    CpuInfo(void);
-
-    /*!
-     * Query a list of per-processor CpuInfo structs.
-     */
-    static std::vector<CpuInfo> get(void);
-
-    std::string vendor;
-    std::string model;
-    int mhz;
-    int mhzMax;
-    int mhzMin;
-    size_t cacheSize;
-    int totalSockets;
-    int totalCores;
-    int coresPerSocket;
 };
 
 } //namespace System
